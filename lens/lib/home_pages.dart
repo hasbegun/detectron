@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:video_player/video_player.dart';
 
@@ -12,7 +14,7 @@ class Home extends StatelessWidget {
       title: 'Detectron Lens',
       home: HomePage(title: 'Detectron Lens'),
       theme: ThemeData(
-        primaryColor: Colors.red,
+        primaryColor: Colors.blue,
         brightness: Brightness.dark,
       ),
       darkTheme: ThemeData(brightness: Brightness.dark),
@@ -35,6 +37,23 @@ class _HomePageState extends State<HomePage> {
   bool isVideo = false;
   VideoPlayerController _controller;
   String _retrieveDataError;
+
+  final String _serverEndPoint = 'http://localhost:8888/upload';
+
+  void _upload() {
+    if (_imageFile == null) return;
+    String base64Image = base64Encode(_imageFile.readAsBytesSync());
+    String fileName = _imageFile.path.split("/").last;
+
+    http.post(_serverEndPoint, body: {
+      "image": base64Image,
+      "name": fileName,
+    }).then((res) {
+      print(res.statusCode);
+    }).catchError((err) {
+      print(err);
+    });
+  }
 
   Future<void> _playVideo(File file) async {
     if (file != null && mounted) {
@@ -110,6 +129,7 @@ class _HomePageState extends State<HomePage> {
       return retrieveError;
     }
     if (_imageFile != null) {
+//      _upload();
       return Image.file(_imageFile);
     } else if (_pickImageError != null) {
       return Text(
