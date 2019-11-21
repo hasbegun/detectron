@@ -1,4 +1,4 @@
-# lens
+# Lens
 
 Detectron Lens
 
