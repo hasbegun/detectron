@@ -7,31 +7,31 @@ import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:video_player/video_player.dart';
 
-class Home extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Detectron Lens',
-      home: HomePage(title: 'Detectron Lens'),
-      theme: ThemeData(
-        primaryColor: Colors.blue,
-        brightness: Brightness.dark,
-      ),
-      darkTheme: ThemeData(brightness: Brightness.dark),
-    );
-  }
-}
+//class Home extends StatelessWidget {
+//  @override
+//  Widget build(BuildContext context) {
+//    return MaterialApp(
+//      title: 'Detectron Lens',
+//      home: HomePage(title: 'Detectron Lens'),
+//      theme: ThemeData(
+//        primaryColor: Colors.blue,
+//        brightness: Brightness.dark,
+//      ),
+//      darkTheme: ThemeData(brightness: Brightness.dark),
+//    );
+//  }
+//}
 
-class HomePage extends StatefulWidget {
-  HomePage({Key key, this.title}) : super(key: key);
+class MobileHome extends StatefulWidget {
+  MobileHome({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _MobileHomeState createState() => _MobileHomeState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _MobileHomeState extends State<MobileHome> {
   File _imageFile;
   dynamic _pickImageError;
   bool isVideo = false;
