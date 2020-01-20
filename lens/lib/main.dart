@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'home_pages.dart';
+import 'package:lens/control/web_app.dart';
 
 void main() {
-  runApp(Home());
+  runApp(WebUploadApp());
 }
