@@ -5,11 +5,11 @@ import 'package:lens/control/web_app.dart';
 import 'package:lens/control/mobile_app.dart';
 
 void main() {
-  runApp(WebApp());
+  runApp(MobileApp());
 
-  bool is_mobile = false;
-  if (Platform.isAndroid || Platform.isIOS) is_mobile = true;
-  print('Is Mobile $is_mobile');
+//  bool is_mobile = false;
+//  if (Platform.isAndroid || Platform.isIOS) is_mobile = true;
+//  print('Is Mobile $is_mobile');
 
 //  if (is_mobile) {
 //    print('runing mobile');
