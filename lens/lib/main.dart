@@ -1,22 +1,12 @@
 import 'package:flutter/material.dart';
-import 'dart:io';
-
-import 'package:lens/control/web_app.dart';
 import 'package:lens/control/mobile_app.dart';
+
+/*
+flutter does not support different type of target.
+Consult the following blog.
+https://medium.com/flutter-community/add-multiple-targets-in-flutter-apps-vs-code-android-studio-efe7e588e0cd
+ */
 
 void main() {
   runApp(MobileApp());
-
-//  bool is_mobile = false;
-//  if (Platform.isAndroid || Platform.isIOS) is_mobile = true;
-//  print('Is Mobile $is_mobile');
-
-//  if (is_mobile) {
-//    print('runing mobile');
-//    runApp(MobileApp());
-//  } else {
-//    print('runing web');
-//    runApp(WebUploadApp());
-//  }
-//  runApp(WebApp());
 }

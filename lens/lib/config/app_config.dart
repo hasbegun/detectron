@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 enum AppEnvironment { DEV, STAGE, PROD }
-enum DeviceEnvironment { WEB, MOBILE }
 
 class AppConfig {
   // Singleton object
