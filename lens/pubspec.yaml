@@ -26,7 +26,9 @@ dependencies:
   image_picker:  ^0.6.1
   video_player: 0.10.1+5
   http: ^0.12.0+2
-  logger: ^0.8.2
+  logger: ^0.8.0
+  path: ^1.6.4
+  mime: ^0.9.6
 
 dev_dependencies:
   flutter_test:

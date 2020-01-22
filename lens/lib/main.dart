@@ -1,14 +1,12 @@
-import 'dart:io' show Platform;
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'home_pages.dart';
-import 'package:logger/logger.dart';
+import 'package:lens/control/mobile_app.dart';
+
+/*
+flutter does not support different type of target.
+Consult the following blog.
+https://medium.com/flutter-community/add-multiple-targets-in-flutter-apps-vs-code-android-studio-efe7e588e0cd
+ */
 
 void main() {
-  final logger = Logger();
-  logger.i('Platform $kIsWeb');
-  if (Platform.isAndroid || Platform.isIOS) {
-    runApp(Home());
-  }
+  runApp(MobileApp());
 }
