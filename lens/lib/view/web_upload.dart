@@ -19,12 +19,11 @@ class FileUploadApp extends StatefulWidget {
 }
 
 class _FileUploadAppState extends State<FileUploadApp> {
+  var _uploadFiles;
   List<int> _selectedFile;
   Uint8List _bytesData;
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   final String server_endpoint = "http://localhost:8888/upload";
-
-  var files;
 
   startWebFilePicker() async {
     html.InputElement uploadInput = html.FileUploadInputElement();
@@ -33,8 +32,8 @@ class _FileUploadAppState extends State<FileUploadApp> {
     uploadInput.click();
 
     uploadInput.onChange.listen((e) {
-      files = uploadInput.files;
-      final file = files[0];
+      _uploadFiles = uploadInput.files;
+      final file = _uploadFiles[0];
       final reader = new html.FileReader();
 
       reader.onLoadEnd.listen((e) {
@@ -43,24 +42,6 @@ class _FileUploadAppState extends State<FileUploadApp> {
       reader.readAsDataUrl(file);
     });
   }
-
-//  Future<String> req2(file) async {
-//    var url = Uri.parse(server_endpoint);
-//    print("req2 url: $url");
-//    var file_path = path.join(file.relativePath, file.name);
-//    print('file rel path=> ${file.relativePath}');
-//    print('file path=> $file_path');
-//
-//    var request = http.MultipartRequest('POST', url)
-//      ..files.add(await http.MultipartFile.fromPath('file1', file_path));
-//
-//    var response = await request.send();
-//    if (response.statusCode == 200)
-//      print("Uploaded");
-//    else
-//      print("response code: ${response.statusCode}");
-//
-//  }
 
   void _handleResult(Object result) {
     setState(() {
@@ -71,21 +52,30 @@ class _FileUploadAppState extends State<FileUploadApp> {
 
   Future<String> makeRequest() async {
     var url = Uri.parse(server_endpoint);
+    var request = new http.MultipartRequest("POST", url);
     print('make request to $url');
 
+    final reader = new html.FileReader();
+    reader.onLoadEnd.listen((e) {
+      _handleResult(reader.result);
+    });
+
     // method 1
-    var request = new http.MultipartRequest("POST", url);
+    var file = _uploadFiles[0];
+//    for (var i = 0; i < uploadFiles.length; i++) {
+//      var f = uploadFiles[i];
+//      print('Processig ${f.name}');
+//    }
+//      reader.readAsDataUrl(f);
+    print("About to send ${file.name} to $url.");
     request.files.add(await http.MultipartFile.fromBytes('file', _selectedFile,
         contentType: new MediaType('application', 'octet-stream'),
-        filename: "file_up"));
-
+        filename: file.name));
     request.send().then((response) {
-      print("About to send to $url.");
-      print(response.statusCode);
       if (response.statusCode == 200)
-        print("Uploaded!");
+        print("${file.name} uploaded!");
       else
-        print('Upload failed: ${response.statusCode}');
+        print('${file.name} upload failed: ${response.statusCode}');
     });
 
     // optional. show dialog to confirm.

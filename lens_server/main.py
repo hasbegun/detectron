@@ -42,6 +42,7 @@ class UploadHandler(tornado.web.RequestHandler):
                 # todo: 2. support multiple.... maybe multi thread..... async
                 # todo: 3. limit the size
                 fname = str(uuid.uuid4())
+                print('filename: ', filename)
                 extenstion = os.path.splitext(filename)[1]
                 final_filename = fname + extenstion
 
