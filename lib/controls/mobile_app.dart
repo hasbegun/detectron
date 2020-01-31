@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lens/view/mobile_home.dart';
+import 'package:lens/views/mobile_home.dart';
 
 class MobileApp extends StatelessWidget {
   @override

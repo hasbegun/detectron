@@ -14,7 +14,8 @@ class AppConfig {
   AppEnvironment appEnvironment;
   String appName;
   String desc;
-  String serverUrl;
+  String protocol;
+  String server;
   String port;
   ThemeData themeData;
 
@@ -22,13 +23,15 @@ class AppConfig {
       {AppEnvironment appEnvironment,
       String appName,
       String desc,
-      String serverUrl,
+      String protocol,
+      String server,
       String port,
       ThemeData themedata}) {
     this.appEnvironment = appEnvironment;
     this.appName = appName;
     this.desc = desc;
-    this.serverUrl = serverUrl;
+    this.protocol = protocol;
+    this.server = server;
     this.port = port;
     this.themeData = themedata;
   }

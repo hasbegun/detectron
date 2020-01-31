@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:lens/config/app_config.dart';
-import 'package:lens/view/mobile_home.dart';
+import 'package:lens/configs/app_config.dart';
+import 'package:lens/views/mobile_home.dart';
 
 void main() {
   AppConfig().setAppConfig(
       appEnvironment: AppEnvironment.DEV,
       appName: 'Lens Dev Mobile',
       desc: 'Image analysis',
-      serverUrl: 'http://192.168.100.1',
+      protocol: 'http',
+      server: 'http://localhost',
       port: '8888',
       themedata: ThemeData(
         primaryColor: Colors.blueGrey,

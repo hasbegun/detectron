@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lens/control/mobile_app.dart';
+import 'package:lens/controls/mobile_app.dart';
 
 /*
 flutter does not support different type of target.

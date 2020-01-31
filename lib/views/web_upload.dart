@@ -6,7 +6,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http_parser/http_parser.dart';
 import 'package:http/http.dart' as http;
-import 'package:lens/control/web_app.dart';
+import 'package:lens/controls/web_app.dart';
 import 'package:logger/logger.dart';
 import 'package:path/path.dart' as path;
 import 'package:mime/mime.dart' as mime;
@@ -19,7 +19,11 @@ class FileUploadApp extends StatefulWidget {
 }
 
 class _FileUploadAppState extends State<FileUploadApp> {
-  var _uploadFiles;
+  dynamic _filesToUpload;
+  dynamic _loadError;
+  double _progressValue = 0;
+  int _progressPercentValue = 0;
+
   List<int> _selectedFile;
   Uint8List _bytesData;
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
@@ -27,13 +31,13 @@ class _FileUploadAppState extends State<FileUploadApp> {
 
   startWebFilePicker() async {
     html.InputElement uploadInput = html.FileUploadInputElement();
-    uploadInput.multiple = true;
+    uploadInput.multiple = false;
     uploadInput.draggable = true;
     uploadInput.click();
 
     uploadInput.onChange.listen((e) {
-      _uploadFiles = uploadInput.files;
-      final file = _uploadFiles[0];
+      _filesToUpload = uploadInput.files;
+      final file = _filesToUpload[0];
       final reader = new html.FileReader();
 
       reader.onLoadEnd.listen((e) {
@@ -61,7 +65,7 @@ class _FileUploadAppState extends State<FileUploadApp> {
     });
 
     // method 1
-    var file = _uploadFiles[0];
+    var file = _filesToUpload[0];
 //    for (var i = 0; i < uploadFiles.length; i++) {
 //      var f = uploadFiles[i];
 //      print('Processig ${f.name}');
@@ -106,12 +110,34 @@ class _FileUploadAppState extends State<FileUploadApp> {
 //        ));
   }
 
+  Widget imageView({img_idx = 0}) {
+//    if (_uploadFiles.length != 0) {
+//      var currentFile = _uploadFiles[0];
+//      if (currentFile) {
+//        return Container(
+//            alignment: Alignment.center, child: Image.file(currentFile));
+//      }
+//    } else {
+//      return Container(
+//          alignment: Alignment.center,
+//          child: Text('No image has been selected'));
+//    }
+
+    // display text
+    return Container(
+        alignment: Alignment.center, child: Text('No image has been selected'));
+    // load img from asserts
+//    return Container(
+//        alignment: Alignment.center,
+//        child: Image(image: AssetImage('images/test1.jpg')));
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('A Flutter Web file picker'),
+          title: Text('Lense file picker'),
         ),
         body: Container(
           child: new Form(
@@ -152,7 +178,25 @@ class _FileUploadAppState extends State<FileUploadApp> {
                             },
                             child: Text('Send file to server'),
                           ),
-                        ])
+                        ]),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        MaterialButton(
+                          color: Colors.red,
+                          elevation: 8,
+                          highlightElevation: 2,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8)),
+                          textColor: Colors.white,
+                          child: Text('PLACE HOLDER'),
+                          onPressed: () {
+                            startWebFilePicker();
+                          },
+                        ),
+                        imageView(),
+                      ],
+                    ),
                   ])),
             ),
           ),

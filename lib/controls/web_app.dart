@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lens/view/web_upload.dart';
+import 'package:lens/views/web_upload.dart';
 
 class WebApp extends StatelessWidget {
   @override
