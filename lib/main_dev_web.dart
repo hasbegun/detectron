@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lens/configs/app_config.dart';
-//import 'package:lens/control/web_app.dart';
 import 'package:lens/views/web_upload.dart';
-import 'package:lens/views/file_load_test.dart';
-import 'package:lens/views/web_upload2.dart';
 
 void main() {
   AppConfig().setAppConfig(
@@ -28,7 +25,7 @@ class WebApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppConfig().themeData,
 //      home: FileUploadApp(),
-      home: FileUploadApp2(
+      home: FileUploadApp(
           AppConfig().protocol, AppConfig().server, AppConfig().port),
     );
   }
