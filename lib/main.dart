@@ -1,12 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:lens/controls/mobile_app.dart';
-
-/*
-flutter does not support different type of target.
-Consult the following blog.
-https://medium.com/flutter-community/add-multiple-targets-in-flutter-apps-vs-code-android-studio-efe7e588e0cd
- */
+import 'package:lens/configs/app_config.dart';
+import 'package:lens/views/web_upload.dart';
 
 void main() {
-  runApp(MobileApp());
+  AppConfig().setAppConfig(
+      appEnvironment: AppEnvironment.DEV,
+      appName: 'Lens Dev Web',
+      desc: 'Image analysis',
+      protocol: 'http',
+      server: 'localhost',
+      port: '8888',
+      themedata: ThemeData(
+        primaryColor: Colors.blueGrey,
+        primarySwatch: Colors.blue,
+      ));
+  runApp(WebApp());
+}
+
+class WebApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: AppConfig().appName,
+      debugShowCheckedModeBanner: false,
+      theme: AppConfig().themeData,
+//      home: FileUploadApp(),
+      home: FileUploadApp(
+          AppConfig().protocol, AppConfig().server, AppConfig().port),
+    );
+  }
 }
